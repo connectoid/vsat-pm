@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="row justify-content-center">
+  <div class="col-md-8 p-5">
+    <div class="card">
+      <div class="card-header">Новая задача</div>
+        <div class="card-body">
+            <form method="post" action="{% url 'task:new_task' %}">
+                  {% csrf_token %}
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend w-25">
+                      <label class="input-group-text" for="inputGroupSelect02">{{ form.customer.label }}</label>
+                    </div>
+                      {{ form.customer }}
+                    <label class="input-group-text" for="inputGroupSelect02"><a href="/new_customer/">Добавить</a></label>
+                  </div>
+
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend w-25">
+                      <label class="input-group-text" for="inputGroupSelect02">{{ form.client.label }}</label>
+                    </div>
+                      {{ form.client }}
+                    <label class="input-group-text" for="inputGroupSelect02"><a href="/new_client/">Добавить</a></label>
+                  </div>
+
+
+                  <p><label>{{form.title.label}}: </label> {{ form.title }}</p>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend w-25">
+                      <label class="input-group-text" for="inputGroupSelect02">{{ form.type.label }}</label>
+                    </div>
+                      {{ form.type }}
+                    <label class="input-group-text" for="inputGroupSelect02"><a href="/new_work_type/">Добавить</a></label>
+                  </div>
+
+
+                  <p><label>{{form.description.label}}: </label> {{ form.description }}</p>
+                  <p><label>{{form.cost.label}}: </label> {{ form.cost }}</p>
+                  <p><label>{{form.address.label}}: </label> {{ form.address }}</p>
+                  
+
+                  <p><label>{{form.executor.label}}: </label></p>
+                  <div class="input-group mb-3">
+                    {{ form.executor }}
+                  </div>
+
+                  <div class="form-check"><p>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{form.is_done.label}}
+                    </label> 
+                    {{ form.is_done }}
+                  </p>
+                  </div>
+                  <div class="form-check"><p>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{form.is_canceled.label}}
+                    </label> 
+                    {{ form.is_canceled }}
+                  </p>
+                  </div>
+                  <div class="form-check"><p>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{form.is_invoiced.label}}
+                    </label> 
+                    {{ form.is_invoiced }}
+                  </p>
+                  </div>
+                  <div class="form-check"><p>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{form.is_paid.label}}
+                    </label> 
+                    {{ form.is_paid }}
+                  </p>
+                  </div>
+                  <div class="form-error">{{ form.title.errors }} </div>
+                  <button type="submit" class="btn btn-primary">Создать</button>
+            </form> 
+        </div> <!-- card body -->
+      </div> <!-- card -->
+    </div> <!-- col -->
+</div> <!-- row -->
+
+
+   
+{% endblock %} 

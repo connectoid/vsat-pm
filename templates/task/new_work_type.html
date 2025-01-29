@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="row justify-content-center">
+  <div class="col-md-8 p-5">
+    <div class="card">
+      <div class="card-header">Новый тип работ</div>
+        <div class="card-body">
+            <form method="post" action="{% url 'task:new_work_type' %}">
+                  {% csrf_token %}
+                  <p><label>{{form.title.label}}: </label> {{ form.title }}</p>
+                  <p><label>{{form.description.label}}: </label> {{ form.description }}</p>
+                  <p><label>{{form.base_price.label}}: </label> {{ form.base_price }}</p>
+
+                  <div class="form-error">{{ form.title.errors }} </div>
+                  <button type="submit" class="btn btn-primary">Создать</button>
+            </form> 
+        </div> <!-- card body -->
+      </div> <!-- card -->
+    </div> <!-- col -->
+</div> <!-- row -->
+
+
+   
+{% endblock %} 

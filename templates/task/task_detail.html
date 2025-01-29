@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Профайл пользователя{% endblock %}
+{% block header %}Профайл пользователя{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">Новая задача</div>
+          <div class="card-body">
+
+<ul>
+    <li>
+      Задача: {{ task.title }}
+    </li>
+    <li>
+      Вид работ: {{ task.type }}
+    </li>
+    <li>
+      Описание: {{ task.description }}
+    </li>
+    <li>
+      Адрес: {{ task.address }}
+    </li>
+    <li>
+      Заказчик: {{ task.customer }}
+    </li>
+    <li>
+      Клиент: {{ task.client }}
+    </li>
+    <li>
+      Исполнитель: {{ task.executor }}
+    </li>
+    <li>
+      Создано: {{ task.adding_date }}
+    </li>
+  </ul>
+  <a href="/user_profile/{{ task.executor.id }}/">Все задачи {{ task.executor.get_full_name }}</a>
+
+</div> <!-- card body -->
+</div> <!-- card -->
+</div> <!-- col -->
+</div> <!-- row -->
+
+
+{% endblock %} 
+

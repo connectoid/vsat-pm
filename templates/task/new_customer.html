@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="row justify-content-center">
+  <div class="col-md-8 p-5">
+    <div class="card">
+      <div class="card-header">Новый заказчик</div>
+        <div class="card-body">
+            <form method="post" action="{% url 'task:new_client' %}">
+                  {% csrf_token %}
+                  <p><label>{{form.name.label}}: </label> {{ form.name }}</p>
+                  <p><label>{{form.is_operator.label}}: </label> {{ form.is_operator }}</p>
+                  <p><label>{{form.contact_person_name.label}}: </label> {{ form.contact_person_name }}</p>
+                  <p><label>{{form.contact_person_phone.label}}: </label> {{ form.contact_person_phone }}</p>
+                  <p><label>{{form.contact_person_email.label}}: </label> {{ form.contact_person_email }}</p>
+                  <p><label>{{form.address.label}}: </label> {{ form.address }}</p>
+
+                  <div class="form-error">{{ form.title.errors }} </div>
+                  <button type="submit" class="btn btn-primary">Создать</button>
+            </form> 
+        </div> <!-- card body -->
+      </div> <!-- card -->
+    </div> <!-- col -->
+</div> <!-- row -->
+
+
+   
+{% endblock %} 
