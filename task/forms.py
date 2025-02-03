@@ -15,10 +15,11 @@ class TaskForm(forms.ModelForm):
             'client',
             'customer',
             'executor',
-            'is_done',
-            'is_canceled',
-            'is_invoiced',
-            'is_paid',
+            'status'
+            # 'is_done',
+            # 'is_canceled',
+            # 'is_invoiced',
+            # 'is_paid',
         )
 
         widgets = {
@@ -63,31 +64,41 @@ class TaskForm(forms.ModelForm):
                 'class':'form-select',
                 'aria-label': 'Выберите тип работ'
             }),
-            'is_done': forms.CheckboxInput(attrs={
-                'class':'form-check-input',
-                'type': 'checkbox',
-                'id': 'flexCheckDefault',
+            'status': forms.Select(attrs={
+                'class':'form-select',
+                'aria-label': 'Установите статус задачи'
             }),
-            'is_canceled': forms.CheckboxInput(attrs={
-                'class':'form-check-input',
-                'type': 'checkbox',
-                'id': 'flexCheckDefault',
-            }),
-            'is_invoiced': forms.CheckboxInput(attrs={
-                'class':'form-check-input',
-                'type': 'checkbox',
-                'id': 'flexCheckDefault',
-            }),
-            'is_paid': forms.CheckboxInput(attrs={
-                'class':'form-check-input',
-                'type': 'checkbox',
-                'id': 'flexCheckDefault',
-            }),
+
+
+            # 'is_done': forms.CheckboxInput(attrs={
+            #     'class':'form-check-input',
+            #     'type': 'radio',
+            #     'id': 'flexRadioDefault1',
+            #     'name': 'flexRadioDefault'
+            # }),
+            # 'is_canceled': forms.CheckboxInput(attrs={
+            #     'class':'form-check-input',
+            #     'type': 'radio',
+            #     'id': 'flexRadioDefault2',
+            #     'name': 'flexRadioDefault'
+            # }),
+            # 'is_invoiced': forms.CheckboxInput(attrs={
+            #     'class':'form-check-input',
+            #     'type': 'radio',
+            #     'id': 'flexRadioDefault3',
+            #     'name': 'flexRadioDefault'
+            # }),
+            # 'is_paid': forms.CheckboxInput(attrs={
+            #     'class':'form-check-input',
+            #     'type': 'radio',
+            #     'id': 'flexRadioDefault4',
+            #     'name': 'flexRadioDefault'
+            # }),
 
 
         }
         
-
+    
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
@@ -215,3 +226,4 @@ class WorkTypeForm(forms.ModelForm):
 
         }
 
+    

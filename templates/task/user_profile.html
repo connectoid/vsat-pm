@@ -3,9 +3,9 @@
 {% block header %}Задачи пользователя{% endblock %}
 {% block content %}
 
-<p>Задачи пользователя {{ user.get_full_name }}</p>
 
-<table class="table">
+<table class="table table-hover caption-top table-sm">
+  <caption>Задачи пользователя {{ user.get_full_name }}</caption>
   <thead>
     <tr>
       <th scope="col">№</th>
@@ -14,19 +14,38 @@
       <th scope="col">Заказчик</th>
       <th scope="col">Клиент</th>
       <th scope="col">Исполнитель</th>
+      <th scope="col">Статус</th>
       <th scope="col">Дата</th>
     </tr>
   </thead>
   <tbody>
 
     {% for task in page_obj %}
-    <tr>
+    {% if task.status == 'done' %}
+      <tr class="table-info">
+    {% elif task.status == 'canceled' %}
+        <tr class="table-danger">
+    {% else %}
+      <tr>
+    {% endif %}
       <th scope="row"><a href="/task/{{ task.id }}/">{{ task.id }}</a></th>
       <td>{{ task.title }}</td>
       <td>{{ task.type }}</td>
       <td>{{ task.customer }}</td>
-      <td>{{ task.client }}</td>
+      {% comment %} <td>{{ task.client }}</td> {% endcomment %}
+      <td><a href="/client_profile/{{ task.client.id }}/">{{ task.client.name }}</a></td>
       <td><a href="/user_profile/{{ task.executor.id }}/">{{ task.executor.get_full_name }}</a></td>
+      {% if task.status == 'canceled' %}
+        <td title="Отменена">🚫</td>
+      {% elif task.status == 'done' %}
+        <td title="Завершена">✅</td>
+      {% elif task.status == 'paid' %}
+        <td title="Оплачена">💰</td>
+      {% elif task.status == 'invoiced' %}
+        <td title="Выставлены документы">🧾</td>
+      {% else %}
+        <td> </td>
+      {% endif %}
       <td>{{ task.adding_date|date:"d-m-Y" }}</td>
     </tr>
     {% endfor %} 

@@ -1,11 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<table class="table table-hover caption-top table-sm">
+  <caption>Все заказчики</caption>
+  <thead>
+    <tr>
+      <th scope="col">№</th>
+      <th scope="col">Наименование</th>
+      <th scope="col">Оператор</th>
+      <th scope="col">Контактное лицо</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">Электронная почта</th>
+      <th scope="col">Адрес</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for customer in page_obj %}
+      <th scope="row"><a href="/customer/{{ customer.id }}/">{{ customer.id }}</a></th>
+      <td>{{ customer.name }}</td>
+      {% if customer.is_operator == True%}
+        <td align="center">✅</td>
+      {% else %}
+        <td> </td>
+      {% endif %}
+      <td>{{ customer.contact_person_name }}</td>
+      <td>{{ customer.contact_person_phone }}</td>
+      <td>{{ customer.contact_person_email }}</td>
+      <td>{{ customer.address }}</td>
+    </tr>
+    {% endfor %} 
+  </tbody>
+</table>
+
 
 <div class="row justify-content-center">
   <div class="col-md-8 p-5">
+
+    
     <div class="card">
-      <div class="card-header">Новый заказчик</div>
+      <div class="card-header">Добавить заказчика</div>
         <div class="card-body">
             <form method="post" action="{% url 'task:new_client' %}">
                   {% csrf_token %}

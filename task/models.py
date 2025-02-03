@@ -13,6 +13,14 @@ WORK_TYPES = (
     ("Другие работы", "other"),
 )
 
+STATUS_CHOICES = (
+    ("in_work", "В работе"),
+    ("done", "Завершена"),
+    ("invoiced", "Выставлены документы"),
+    ("paid", "Оплачена"),
+    ("canceled", "Отменена"),
+)
+
 class Customer(models.Model):
     name = models.CharField(
         max_length=255,
@@ -92,10 +100,17 @@ class Task(models.Model):
         on_delete=models.CASCADE, 
         blank=False, null=False, 
         verbose_name=u'Исполнитель')
-    is_done = models.BooleanField(default=False, verbose_name='Завершена')
-    is_canceled = models.BooleanField(default=False, verbose_name='Отменена')
-    is_invoiced = models.BooleanField(default=False, verbose_name='Выставлены документы')
-    is_paid = models.BooleanField(default=False, verbose_name='Оплачена')
+    status = models.CharField(
+        u'Статус', 
+        max_length=50, 
+        choices=STATUS_CHOICES,
+        default='in_work'
+    )
+
+    # is_done = models.BooleanField(default=False, verbose_name='Завершена')
+    # is_canceled = models.BooleanField(default=False, verbose_name='Отменена')
+    # is_invoiced = models.BooleanField(default=False, verbose_name='Выставлены документы')
+    # is_paid = models.BooleanField(default=False, verbose_name='Оплачена')
 
     class Meta:
         ordering = ['pk']

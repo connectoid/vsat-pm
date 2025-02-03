@@ -5,9 +5,9 @@
 <div class="row justify-content-center">
   <div class="col-md-8 p-5">
     <div class="card">
-      <div class="card-header">Новая задача</div>
+      <div class="card-header">Редактировать задачу</div>
         <div class="card-body">
-            <form method="post" action="{% url 'task:new_task' %}">
+            <form method="post">
                   {% csrf_token %}
 
                   <div class="input-group mb-3">
@@ -54,8 +54,9 @@
                     {{ form.status }}
                   </div>
 
+
                   <div class="form-error">{{ form.title.errors }} </div>
-                  <button type="submit" class="btn btn-primary">Создать</button>
+                  <button type="submit" class="btn btn-primary">Сохранить</button>
             </form> 
         </div> <!-- card body -->
       </div> <!-- card -->

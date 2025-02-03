@@ -1,47 +1,81 @@
 {% load static %}
+<div class="container">
 <header>
-  <nav class="navbar navbar-light" style="background-color: lightskyblue">
-    <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+
+
       <a class="navbar-brand" href="{% url 'task:index' %}">
         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
         <span style="color:red">VSAT</span>PM
       </a>
-      {# Добавлено в спринте #}
 
-      {% comment %}
-      Меню - список пунктов со стандартными классами Bootsrap.
-      Класс nav-pills нужен для выделения активных пунктов 
-      {% endcomment %}
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'task:index' %}">Главная</a>
-        </li>
-        <li class="nav-item"> 
-          <a class="nav-link" href="{% url 'about:about' %}">О проекте</a>
-        </li>
+      
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'task:index' %}">Главная</a>
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'about:about' %}">Справочники</a>
+          </li>
+          {% if user.is_authenticated %}
+  
+          <li class="nav-item"> 
+            <a class="nav-link" href="{% url 'task:new_task' %}">Новая задача</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Фильтр
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="{% url 'task:index' %}"><b>Все</b></a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'task:completed_tasks' %}">✅ Завершено</a></li>
+              <li><a class="dropdown-item" href="#">🧾 Выставлены документы</a></li>
+              <li><a class="dropdown-item" href="#">💰 Оплачено</a></li>
+              <li><a class="dropdown-item" href="#">🚫 Отменено</a></li>
+            </ul>
+          </li>
+
+          {% endif %}
+
+        </ul>
+        
         {% if user.is_authenticated %}
-        <li class="nav-item"> 
-          <a class="nav-link" href="{% url 'task:new_task' %}">Новая задача</a>
+        <ul class="navbar-nav me-right my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ user.username }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'users:password_change' %}">Изменить пароль</a></li>
+            <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Профиль</a></li>
+          </ul>
         </li>
-        <li class="nav-item"> 
-          <a class="nav-link link-light" href="{% url 'users:password_change' %}">Изменить пароль</a>
-        </li>
-        <li class="nav-item"> 
-          <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
-        </li>
-        <li>
-          Пользователь: {{ user.username }}
-        </li>
+
+        
         {% else %}
-        <li class="nav-item"> 
-          <a class="nav-link link-light" href="{% url 'users:login' %}">Войти</a>
+        <ul class="navbar-nav me-right my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Вход /Регистрация
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li><a class="dropdown-item" href="{% url 'users:login' %}">Войти</a></li>
+            <li><a class="dropdown-item" href="{% url 'users:signup' %}">Регистрация</a></li>
+          </ul>
         </li>
-        <li class="nav-item"> 
-          <a class="nav-link link-light" href="{% url 'users:signup' %}">Регистрация</a>
-        </li>
-        {% endif %}
+        </ul>
       </ul>
-      {# Конец добавленого в спринте #}
+        {% endif %}
+
+      </div>
     </div>
-  </nav>      
+  </nav>   
 </header> 
+</div>
